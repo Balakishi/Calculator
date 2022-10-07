@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace CalculatorTest
 {
     public partial class Form_Calculator : Form
@@ -20,7 +22,7 @@ namespace CalculatorTest
 
         }
 
-
+        #region point "." button
         private void btn_p_Click(object sender, EventArgs e)
         {
             if(Output.Text=="")
@@ -34,63 +36,80 @@ namespace CalculatorTest
 
 
         }
+        #endregion
 
+        #region clear button
         private void btn_clear_Click(object sender, EventArgs e)
         {
             Output.Text = "";
             lbl_result.Text= ""; 
         }
+        #endregion
+
+
+        #region arhitmetic operations buttons
         double result;
         private void button3_Click_1(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            if (operation == "+")
-            {
-                lbl_result.Text += Output.Text;
-                result = first + second;
-                Output.Text = result.ToString();
-
-            }
-            if (operation == "-")
-            {
-                lbl_result.Text += Output.Text;
-                result = first - second;
-                Output.Text = result.ToString();
-
-            }
-            if (operation == "*")
-            {
-                lbl_result.Text += Output.Text;
-                result = first * second;
-                Output.Text = result.ToString();
-
-            }
-            if (operation == "/")
-            {
-                if (second != 0)
+            try {
+                if (Output.Text.Length > 0)
                 {
-                    lbl_result.Text += Output.Text;
-                    result = first / second;
-                    Output.Text = result.ToString();
+                    second = Convert.ToDouble(Output.Text);
+                    if (operation == "+")
+                    {
+                        lbl_result.Text += Output.Text;
+                        result = first + second;
+                        Output.Text = result.ToString();
+
+                    }
+                    if (operation == "-")
+                    {
+                        lbl_result.Text += Output.Text;
+                        result = first - second;
+                        Output.Text = result.ToString();
+
+                    }
+                    if (operation == "*")
+                    {
+                        lbl_result.Text += Output.Text;
+                        result = first * second;
+                        Output.Text = result.ToString();
+
+                    }
+                    if (operation == "/")
+                    {
+                        if (second != 0)
+                        {
+                            lbl_result.Text += Output.Text;
+                            result = first / second;
+                            Output.Text = result.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("0-a bolme yoxdur!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    if (operation == "percent")
+                    {
+                        lbl_result.Text += Output.Text;
+                        result = first * second / 100;
+                        Output.Text = result.ToString();
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("0-a bolme yoxdur!");
-                }
+               
             }
-            if (operation == "percent")
+            catch
             {
-                lbl_result.Text+=Output.Text;
-                result= first*second/100;
-                Output.Text = result.ToString();
+
             }
         }
+        #endregion
 
         private void button4_Click(object sender, EventArgs e)
         {
 
         }
-        //backspace button
+        #region backspace button
         private void button1_Click_3(object sender, EventArgs e)
         {
             if (Output.Text.Length > 0)
@@ -102,8 +121,9 @@ namespace CalculatorTest
                 Output.Text = "";
             }
         }
+        #endregion
 
-      
+        #region numbers
         //number 1 button
         private void btn_n1_Click(object sender, EventArgs e)
         {
@@ -224,120 +244,257 @@ namespace CalculatorTest
                 Output.Text += 0;
             }
         }
+        #endregion
 
-        
+        #region sum operation button
         string operation;
         double first, second;
-
-        //sum operation button
         private void btn_sum_Click(object sender, EventArgs e)
         {
-            first = Convert.ToDouble(Output.Text);
-            operation = "+";
-            lbl_result.Text = Output.Text + "+";
-            Output.Text = "";
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    first = Convert.ToDouble(Output.Text);
+                    operation = "+";
+                    lbl_result.Text = Output.Text + "+";
+                    Output.Text = "";
+                }
+            }
+            catch
+            {
 
-        //minus operation button
+            }
+        }
+        #endregion
+
+        #region minus button
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            first = Convert.ToDouble(Output.Text);
-            operation = "-";
-            lbl_result.Text = Output.Text + "-";
-            Output.Text = "";
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    first = Convert.ToDouble(Output.Text);
+                    operation = "-";
+                    lbl_result.Text = Output.Text + "-";
+                    Output.Text = "";
+                }
+            }
+            catch
+            {
 
-        //multiplay operation button
+            }
+        }
+        #endregion
+
+        #region multiplay operation button
         private void btn_by_Click(object sender, EventArgs e)
         {
-            first = Convert.ToDouble(Output.Text);
-            operation = "*";
-            lbl_result.Text = Output.Text + "*";
-            Output.Text = "";
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    first = Convert.ToDouble(Output.Text);
+                    operation = "*";
+                    lbl_result.Text = Output.Text + "*";
+                    Output.Text = "";
+                }
+            }
+            catch
+            {
 
-        //percent button
+            }
+          
+          
+        }
+        #endregion
+
+        #region percent button
         private void btn_percent_Click(object sender, EventArgs e)
         {
-            first = Convert.ToDouble(Output.Text);
-            operation = "percent";
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    first = Convert.ToDouble(Output.Text);
+                    operation = "percent";
 
-            lbl_result.Text += Output.Text + "%";
-            Output.Text = "";
+                    lbl_result.Text += Output.Text + "%";
+                    Output.Text = "";
+                }
+            }
+            catch
+            {
+
+            }
         }
-        //power 2 button
+        #endregion
+
+        #region power 2 "square" button
         private void btn_power2_Click(object sender, EventArgs e)
         {
-            second= Convert.ToDouble(Output.Text);
-            lbl_result.Text = second + "^2";
-            result = Math.Pow(second, 2);
-            Output.Text=result.ToString();
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = second + "^2";
+                    result = Math.Pow(second, 2);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
+
+            }
         }
-        //power 3 button
+        #endregion
+
+        #region power 3 button
         private void btn_power3_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = second + "^3";
-            result = Math.Pow(second, 3);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = second + "^3";
+                    result = Math.Pow(second, 3);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //root operation button
+            }
+        }
+        #endregion
+
+        #region root operation button
         private void btn_root_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = second + " " + "root";
-            result = Math.Sqrt(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = second + " " + "root";
+                    result = Math.Sqrt(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //tan button
-        int i, fakt=1;
+            }
+        }
+        #endregion
+
+        #region tan button
 
         private void btn_tan_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "tan" + second;
-            result = Math.Tan(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "tan" + second;
+                    result = Math.Tan(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //cos button
+            }
+        }
+        #endregion
+
+        #region cos button
         private void btn_cos_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "cos" + second;
-            result = Math.Cos(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "cos" + second;
+                    result = Math.Cos(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //sin button
+            }
+            
+        }
+        #endregion
+
+        #region sin button
         private void btn_sin_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "sin" + second;
-            result = Math.Sin(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "sin" + second;
+                    result = Math.Sin(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //log button
+            }
+        }
+        #endregion
+
+        #region log button
         private void btn_log_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "log" + second;
-            result = Math.Log(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "log" + second;
+                    result = Math.Log(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
-        //ln button
+            }
+
+        }
+        #endregion
+
+        #region ln button
         private void btn_ln_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "ln" + second;
-            result = Math.Log10(second);
-            Output.Text = result.ToString();
-        }
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "ln" + second;
+                    result = Math.Log10(second);
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
 
+            }
+        }
+        #endregion
+
+        #region pi and e button
         //pi button
         private void btn_pi_Click(object sender, EventArgs e)
         {
@@ -349,55 +506,101 @@ namespace CalculatorTest
         {
             Output.Text = "2,71";
         }
+        #endregion
 
-        //1 over button
+        #region 1 over button
         private void button_1over_Click(object sender, EventArgs e)
         {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "1/" + second;
-            result = 1/second;
-            Output.Text = result.ToString();
-        }
-
-        //mod button
-        private void btn_mod_Click(object sender, EventArgs e)
-        {
-            second = Convert.ToDouble(Output.Text);
-            lbl_result.Text = "Mod" + second;
-            result = second % 10;
-            Output.Text = result.ToString();
-        }
-
-
-        //faktorial button
-        private void btn_faktorial_Click(object sender, EventArgs e)
-        {
-            second = Convert.ToDouble(Output.Text);
-            if(second > 0)
+            try
             {
-                for (i = 1; i <= second; i++)
+                if (Output.Text.Length > 0)
                 {
-                    fakt = fakt * i;
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "1/" + second;
+                    result = 1 / second;
+                    Output.Text = result.ToString();
                 }
             }
-            else
+            catch
             {
-                MessageBox.Show("Bu ededin faktoriali tapila bilmez!");
-            }
-            lbl_result.Text = second + " " + "!";
-            result = fakt;
-            Output.Text = result.ToString();
-        }
 
-        //over button
+            }
+        }
+        #endregion
+
+        #region mod button
+        private void btn_mod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    lbl_result.Text = "Mod" + second;
+                    result = second % 10;
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        #endregion
+
+        #region faktorial button
+
+        int i, fakt = 1;
+        private void btn_faktorial_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    second = Convert.ToDouble(Output.Text);
+                    if (second > 0)
+                    {
+                        for (i = 1; i <= second; i++)
+                        {
+                            fakt = fakt * i;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bu ededin faktoriali tapila bilmez!","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    lbl_result.Text = second + " " + "!";
+                    result = fakt;
+                    Output.Text = result.ToString();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        #endregion
+
+        #region over button
         private void btn_over_Click(object sender, EventArgs e)
         {
-            first = Convert.ToDouble(Output.Text);
-            operation = "/";
+            try
+            {
+                if (Output.Text.Length > 0)
+                {
+                    first = Convert.ToDouble(Output.Text);
+                    operation = "/";
 
-            lbl_result.Text = Output.Text + "/";
-            Output.Text = "";
+                    lbl_result.Text = Output.Text + "/";
+                    Output.Text = "";
+                }
+            }
+            catch
+            {
+
+            }
         }
+        #endregion
 
     }
 }
